@@ -1,0 +1,67 @@
+{
+  // Specifies the version of the manifest file format. 
+  // Chrome extensions must use manifest_version 3.
+  "manifest_version": 3,
+
+  // The name of the Chrome extension.
+  "name": "PageFontStyle",
+
+  // A short description of what the extension does.
+  "description": "This extension changes the font style in a specific page.",
+
+  // The version number of the extension. 
+  // Should be updated for each new release.
+  "version": "1.0",
+
+  // Icons for the extension in different sizes. 
+  // These are used in the Chrome toolbar and extension management page.
+  "icons": {
+    // 128x128 pixel icon.
+    "128": "icon128.png",
+    // 48x48 pixel icon.
+    "48": "icon48.png",
+    // 16x16 pixel icon.
+    "16": "icon16.png"
+  },
+
+  // Defines the action that happens when the extension icon is clicked in the Chrome toolbar.
+  "action": {
+    // Default icon for the action.
+    "default_icon": "icon16.png",
+    // The HTML file to show in a popup when the extension icon is clicked.
+    "default_popup": "popup.html",
+    // The title shown when hovering over the extension icon.
+    "default_title": "PageFontStyle"
+  },
+
+  // Configuration for the background script. 
+  // The background script handles events and performs background tasks.
+  "background": {
+    // Service worker script that acts as the background script.
+    "service_worker": "eventPage.js"
+  },
+
+  // Configuration for content scripts. 
+  // Content scripts run in the context of web pages specified in the "matches" field.
+  "content_scripts": [
+    {
+      // Specifies which pages the content script should run on.
+      // Here, it matches any page under the "https://developer.chrome.com/" domain.
+      "matches": ["https://developer.chrome.com/*"],
+      // The JavaScript file to inject into the matched pages.
+      "js": ["content.js"],
+      // The CSS file to inject into the matched pages.
+      "css": ["content.css"]
+    }
+  ],
+
+  // Permissions the extension needs to function properly.
+  "permissions": [
+    // Allows the extension to use the tabs API.
+    "tabs",
+    // Allows the extension to interact with the currently active tab.
+    "activeTab",
+    // Allows the extension to use the scripting API for injecting scripts and CSS.
+    "scripting"
+  ]
+}
